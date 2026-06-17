@@ -1,4 +1,4 @@
-# Dataset Exploration
+# Phase 1 -Dataset Exploration
 
 ## Objective
 Explore the raw credit card transaction dataset before cleaning or modeling.
@@ -57,10 +57,27 @@ Transaction counts:
 
 Most transactions are swipe-based. I will later investigate whether fraud rates differ across payment methods.
 
-## Next Steps
+# Phase 2 – Data Cleaning
 
-* Convert Amount to numeric
-* Create a proper Date column
-* Handle missing values
-* Create additional features such as DayOfWeek, Hour, and Season
-* Perform EDA and fraud analysis
+## What I did
+- Removed "$" from Amount column and converted it to float
+- Created a proper Date column using Year, Month, Day
+- Filled missing values in Merchant State, Zip, and Errors
+- Removed duplicate transactions
+- Created new features:
+  - DayOfWeek
+  - Hour
+  - Festive Period
+  - Merchant Category (from MCC)
+
+## Why this was needed
+Raw financial data is messy and not directly usable for analysis or ML.
+Cleaning ensures:
+- No missing value issues
+- Correct data types for modeling
+- Better feature engineering for insights and fraud detection
+
+## Key output
+- Dataset shape reduced/cleaned: (19963, XX columns)
+- No duplicate rows found
+- Ready for EDA and visualization phase

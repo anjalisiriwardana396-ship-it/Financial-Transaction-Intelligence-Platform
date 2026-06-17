@@ -15,3 +15,19 @@
 ## Challenges
 
 The fraud detection task presents a severe class imbalance problem. Because fraudulent transactions represent only 0.135% of the data, accuracy alone is not a reliable metric. The project addresses this by applying SMOTE on the training data and evaluating the model using precision, recall, ROC-AUC, and confusion matrices.
+## Data Cleaning Performed
+
+The following preprocessing steps were applied to make the dataset analysis-ready:
+
+- Removed `$` symbol from `Amount` and converted it to numeric type
+- Combined `Year`, `Month`, and `Day` into a single `Date` column
+- Filled missing values:
+  - `Merchant State` → "Unknown"
+  - `Zip` → 0
+  - `Errors?` → "No Error"
+- Removed duplicate transactions
+- Created new features:
+  - `DayOfWeek` (weekday pattern analysis)
+  - `Hour` (transaction time behavior)
+  - `Festive period` (festive spending patterns)
+  - `Category` (mapped from MCC codes)
