@@ -81,3 +81,67 @@ Cleaning ensures:
 - Dataset shape reduced/cleaned: (19963, XX columns)
 - No duplicate rows found
 - Ready for EDA and visualization phase
+
+# Phase 3-EDA Insights
+ 
+## Key Buisness Insights 
+### Overall Spending
+- Total transactions: 19,963
+- Total spending: $1.62M
+- Average transaction: $81.30
+- Largest transaction: $1,409.40
+- Data spans 2002–2020
+
+---
+
+### Yearly Trend
+- Spending is relatively stable across years (~88k–99k range)
+- No strong long-term growth or decline
+- 2002 and 2020 have lower values (partial years likely)
+
+---
+
+### Category Insights
+- Highest spending categories:
+  - Other ($364K)
+  - Pharmacy ($273K)
+  - Grocery ($272K)
+- Highest average transaction value:
+  - Utilities (~$124)
+  - Wholesale (~$116)
+
+---
+
+### Payment Method Behavior
+- Swipe transactions dominate volume and total spending
+- Online transactions have higher average value ($112 vs ~$80)
+
+---
+
+### Fraud Pattern Insight
+- Online transactions have highest fraud rate (~1.14%)
+- Chip transactions have lowest fraud rate (~0.04%)
+
+---
+
+### Geographic Insight
+- Spending heavily concentrated in:
+  - La Verne
+  - Mira Loma
+  - Monterey Park
+- ONLINE transactions are a major category (important for fraud risk)
+
+---
+
+### Time-Based Behavior
+- Spending is fairly evenly distributed across weekdays
+- Hour 6 shows extremely high spending spike (~$875K) → needs validation (possible data issue or aggregation artifact)
+
+---
+
+### Seasonal / Festive Insight
+- Strong festive spending spikes:
+  - New Year: $148K
+  - Christmas: $145K
+  - Avurudu: $124K (important regional pattern)
+- Seasonal behavior is clearly visible and meaningful for financial planning   

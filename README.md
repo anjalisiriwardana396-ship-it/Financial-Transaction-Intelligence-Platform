@@ -1,4 +1,4 @@
-## Dataset Overview
+## Dataset Overview                       -------------------
 
 * 19,963 credit card transactions
 * 15 original features
@@ -15,8 +15,7 @@
 ## Challenges
 
 The fraud detection task presents a severe class imbalance problem. Because fraudulent transactions represent only 0.135% of the data, accuracy alone is not a reliable metric. The project addresses this by applying SMOTE on the training data and evaluating the model using precision, recall, ROC-AUC, and confusion matrices.
-## Data Cleaning Performed
-
+## Data Cleaning Performed                          ---------------------------
 The following preprocessing steps were applied to make the dataset analysis-ready:
 
 - Removed `$` symbol from `Amount` and converted it to numeric type
@@ -30,4 +29,30 @@ The following preprocessing steps were applied to make the dataset analysis-read
   - `DayOfWeek` (weekday pattern analysis)
   - `Hour` (transaction time behavior)
   - `Festive period` (festive spending patterns)
-  - `Category` (mapped from MCC codes)
+  - `Category` (mapped from MCC codes)                                
+## Key EDA Insights -------------------                                                         
+- Total spending across dataset :1.62M across 19963 transactions                                        - Average transaction value: $81.30
+- Spending is relatively stable across years (no major long-term growth trend)
+
+### Category Behavior
+- Highest spending occurs in:
+  - Other, Pharmacy, Grocery categories
+- Utilities and Wholesale have higher average transaction values
+
+### Fraud Behavior
+- Online transactions show the highest fraud rate (~1.14%)
+- Chip transactions are the most secure (~0.04% fraud rate)
+
+### Time-Based Insights
+- Spending is distributed fairly evenly across weekdays
+- Significant spending spike observed at Hour 6 (requires further investigation)
+
+### Seasonal Trends
+- Strong spending peaks during:
+  - New Year
+  - Christmas
+  - Avurudu (regional seasonal effect)
+
+### Geographic Insights
+- Spending is concentrated in a few cities like La Verne, Mira Loma, and Monterey Park
+- Online transactions also form a significant portion of activity
