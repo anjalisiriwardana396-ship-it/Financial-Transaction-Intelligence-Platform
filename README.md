@@ -1,4 +1,4 @@
-## Dataset Overview                       -------------------
+## Dataset Overview                                         -------------------
 
 * 19,963 credit card transactions
 * 15 original features
@@ -55,4 +55,31 @@ The following preprocessing steps were applied to make the dataset analysis-read
 
 ### Geographic Insights
 - Spending is concentrated in a few cities like La Verne, Mira Loma, and Monterey Park
-- Online transactions also form a significant portion of activity
+- Online transactions also form a significant portion of activity                                                                 
+## Spending PREDICTION MODEL                                            -------------------------------
+To forecast future credit card spending, a time-series regression model was built using historical transaction data (2002–2020).
+
+### Approach
+- Aggregated 19,963 transactions into monthly totals
+- Engineered time-series features:
+  - Lag1, Lag2, Lag3 (previous months' spending)
+  - Rolling 3-month average
+  - Month, Year, and festive indicators
+- Trained a Linear Regression model
+
+### Why this approach
+Simple regression was chosen for interpretability and explainability in a financial context.
+
+### Model Performance
+- MAE (Mean Absolute Error): ~$706.80
+- Average monthly spending: ~$8,000
+- Error rate: ~8–9%
+
+### Key Insight
+- Model captures overall trend correctly
+- Fails to capture sudden dips/spikes (expected limitation of linear models)
+- Spending remains relatively stable in later years (~$7.6K–$7.8K forecasted)
+
+### Business Value
+- Helps estimate future cash flow
+- Useful for personal finance tracking or banking analytics dashboards

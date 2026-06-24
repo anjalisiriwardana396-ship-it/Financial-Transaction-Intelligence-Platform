@@ -144,4 +144,24 @@ Cleaning ensures:
   - New Year: $148K
   - Christmas: $145K
   - Avurudu: $124K (important regional pattern)
-- Seasonal behavior is clearly visible and meaningful for financial planning   
+- Seasonal behavior is clearly visible and Meaningful for financial behaviour.                        
+# Phase 6 – Spending Prediction Model (Learning Notes)
+### What I learned
+- How to convert transaction-level data into time-series data
+- How lag features work (Lag1, Lag2, Lag3)
+- Why rolling averages help smooth volatility
+- Why time-series split is not random split
+
+### Key Concepts
+- Lag features = previous values used for prediction
+- Rolling mean = trend smoothing
+- Time-based split = prevents data leakage
+
+### Model Behavior
+- Linear regression captures trend but not sudden changes
+- MAE ~ $706 is acceptable for financial forecasting
+- Predictions stay stable due to linear nature of model
+
+### Limitations observed
+- Cannot detect sudden spending spikes
+- Sensitive to long-term linear assumption 
