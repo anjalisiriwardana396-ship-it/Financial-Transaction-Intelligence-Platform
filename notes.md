@@ -164,4 +164,194 @@ Cleaning ensures:
 
 ### Limitations observed
 - Cannot detect sudden spending spikes
-- Sensitive to long-term linear assumption 
+- Sensitive to long-term linear assumption                                         ###
+# Phase 7 - Fraud Detection Model
+## Objective
+
+Build a machine learning model capable of predicting whether a credit card transaction is fraudulent.
+
+---
+
+## Problem
+
+The dataset contains:
+
+- Total transactions: 19,963
+- Fraud transactions: 27
+- Fraud percentage: 0.135%
+
+This creates a severe class imbalance problem.
+
+A model predicting "No Fraud" for every transaction would achieve approximately **99.8% accuracy**, while detecting zero fraudulent transactions.
+
+Therefore, accuracy is not an appropriate evaluation metric.
+
+---
+
+## Solution
+
+The workflow followed was:
+
+1. Select useful transaction features.
+2. Encode categorical variables using LabelEncoder.
+3. Split the dataset into training and testing sets using stratified sampling.
+4. Apply SMOTE only to the training data.
+5. Train multiple classification models.
+6. Compare model performance.
+7. Save the best-performing model.
+
+---
+
+## Why SMOTE?
+
+SMOTE (Synthetic Minority Oversampling Technique) creates synthetic fraud samples to balance the training dataset.
+
+Correct workflow:
+
+Original Dataset
+
+↓
+
+Train/Test Split
+
+↓
+
+SMOTE on Training Data Only
+
+↓
+
+Train Model
+
+↓
+
+Evaluate on Original Test Data
+
+Applying SMOTE before splitting would introduce data leakage and produce misleading evaluation results.
+
+---
+
+## Models Compared
+
+### Logistic Regression
+
+Advantages:
+- Simple
+- Fast
+- Easy to interpret
+
+Result:
+
+- Precision: 0.003
+- Recall: 0.400
+- ROC-AUC: 0.8410
+
+---
+
+### Random Forest
+
+Advantages:
+- Handles nonlinear relationships
+- Robust against overfitting
+- Provides feature importance
+
+Result:
+
+- Precision: 0.250
+- Recall: 0.200
+- F1-score: 0.222
+- ROC-AUC: 0.9809
+
+Selected as the final model.
+
+---
+
+### XGBoost
+
+Advantages:
+- Powerful boosting algorithm
+- Often achieves excellent performance
+
+Result:
+
+- Precision: 0.200
+- Recall: 0.200
+- ROC-AUC: 0.9342
+
+---
+
+## Evaluation Metrics Learned
+
+### Precision
+
+Among all transactions predicted as fraud,
+how many were actually fraud?
+
+Higher precision means fewer false alarms.
+
+---
+
+### Recall
+
+Among all actual fraud transactions,
+how many were detected?
+
+Higher recall means fewer fraud cases are missed.
+
+---
+
+### F1-score
+
+Balances Precision and Recall.
+
+Useful when dealing with imbalanced datasets.
+
+---
+
+### ROC-AUC
+
+Measures the model's ability to distinguish fraudulent and legitimate transactions.
+
+- 1.0 = Perfect
+- 0.5 = Random guessing
+
+Random Forest achieved:
+
+ROC-AUC = **0.9809**
+
+---
+
+## Feature Importance
+
+Most influential features:
+
+1. Hour
+2. MCC
+3. Merchant State
+4. Payment Method
+5. Month
+
+Least influential feature:
+
+- Errors?
+
+---
+
+## Lessons Learned
+
+- Never rely on accuracy when classes are highly imbalanced.
+- Always split the dataset before applying SMOTE.
+- Compare multiple models instead of selecting one immediately.
+- ROC-AUC provides a better evaluation than accuracy for fraud detection.
+- Feature importance helps explain why the model makes predictions.
+
+---
+
+## Final Outcome
+
+Successfully built a fraud detection pipeline that:
+
+- Handles severe class imbalance correctly.
+- Prevents data leakage.
+- Compares multiple machine learning models.
+- Selects the best model objectively.
+- Saves the trained model for deployment in the Flask application.
