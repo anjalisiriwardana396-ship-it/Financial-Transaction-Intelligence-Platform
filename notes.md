@@ -354,4 +354,133 @@ Successfully built a fraud detection pipeline that:
 - Prevents data leakage.
 - Compares multiple machine learning models.
 - Selects the best model objectively.
-- Saves the trained model for deployment in the Flask application.
+- Saves the trained model for deployment in the Flask application.                                                                                                                                       
+---
+
+# Phase 8 — Flask App Notes
+
+## Purpose of this phase
+
+This phase connects machine learning models to a web application using Flask.
+
+It acts as the **deployment layer** of the project.
+
+---
+
+## Architecture Flow
+
+Frontend (HTML Dashboard)
+        ↓
+Flask Backend (app.py)
+        ↓
+Machine Learning Models (pickle files)
+        ↓
+JSON Response → Frontend Updates UI
+
+---
+
+## Routes Summary
+
+### 1. Home Route (`/`)
+- Loads dashboard UI (index.html)
+
+### 2. Summary API (`/summary`)
+Returns:
+- Total transactions
+- Total spending
+- Fraud count
+- Fraud rate
+- Best model used
+
+---
+
+### 3. Insights API (`/insights`)
+Returns:
+- Online fraud rate
+- Top spending category
+- Peak festive period
+- Peak spending year
+
+---
+
+### 4. Chart Data API (`/chart_data`)
+Used for visualizations:
+- Yearly spending trend
+- Category distribution
+- Fraud by payment method
+- Festive spending breakdown
+
+---
+
+### 5. Spending Prediction API (`/predict_spending`)
+
+Input:
+- months_ahead (1–12)
+
+Process:
+- Uses trained Linear Regression model
+- Builds lag features:
+  - Lag1, Lag2, Lag3
+  - Rolling mean
+- Predicts future monthly spending iteratively
+
+Output:
+- Future spending values
+
+---
+
+### 6. Fraud Prediction API (`/predict_fraud`)
+
+Input:
+- Transaction features (amount, MCC, merchant, time, etc.)
+
+Process:
+- Encodes categorical values using saved LabelEncoders
+- Uses trained classification model
+- Outputs probability + final decision
+
+Output:
+- Fraud / Not Fraud
+- Fraud probability (%)
+- Verdict label
+
+---
+
+## Important Technical Concepts
+
+### 1. Model Persistence
+- Models saved using pickle
+- Loaded once when Flask starts
+
+### 2. Label Encoding Consistency
+- Same encoders used in training and inference
+- Prevents mismatch in categorical data
+
+### 3. Time-Series Prediction Logic
+- Uses lag-based features
+- Prevents future leakage
+- Forecasts step-by-step
+
+### 4. Class Imbalance Handling (Fraud Model)
+- SMOTE used during training only
+- Prevents synthetic data leakage into test set
+
+---
+
+## Key Learning Outcome
+
+This phase demonstrates:
+
+- How ML models are deployed in real applications
+- How APIs connect backend ML to frontend UI
+- How real-time predictions are served using Flask
+
+---
+
+## Final System Status
+
+✔ Fraud Detection API working  
+✔ Spending Prediction API working  
+✔ Dashboard APIs integrated  
+✔ Models loaded at runtime  
+✔ JSON communication established     

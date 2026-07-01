@@ -153,4 +153,82 @@ Because the test set contained only **5 fraud cases**, Precision and Recall are 
 - Spending remained relatively stable throughout the later years of the dataset.
 - Seasonal spending increased during New Year, Christmas, and Avurudu periods.
 - Random Forest achieved the highest ROC-AUC among the evaluated fraud detection models.
-- Transaction hour and merchant category were the strongest predictors of fraud.
+- Transaction hour and merchant category were the strongest predictors of fraud.                                                                                                                                             
+#  Phase 8 — Flask Web Application (Deployment Layer)
+## What is Flask?
+
+Flask is a lightweight Python web framework that allows us to convert our machine learning models into a working web application. It acts as a backend server that connects our trained models to a browser-based dashboard.
+
+Instead of just running models in Python scripts, Flask allows users to interact with predictions through a website.
+
+---
+
+## What are we building?
+
+We are building a Flask backend that serves a financial intelligence dashboard with two main capabilities:
+
+### 1. Spending Analytics Dashboard
+- Total transactions
+- Total spending
+- Fraud rate
+- Category-wise insights
+- Yearly and festive trends
+
+### 2. Machine Learning APIs
+- Spending prediction (time-series forecasting model)
+- Fraud detection (classification model)
+
+---
+
+## Flask API Routes
+
+The application exposes the following endpoints:
+
+### `/`
+- Loads the main dashboard (HTML frontend)
+
+### `/summary`
+Returns KPI-level financial metrics:
+- Total transactions
+- Total spending
+- Average transaction value
+- Fraud count and fraud rate
+- Best performing fraud detection model
+
+### `/insights`
+Returns business insights such as:
+- Online transaction fraud rate
+- Highest spending category
+- Peak festive period
+- Peak spending year
+
+### `/chart_data`
+Provides structured data for frontend visualizations:
+- Yearly spending trend
+- Category-wise spending
+- Fraud by payment method
+- Festive period spending
+
+### `/predict_spending` (POST)
+- Input: number of months ahead (1–12)
+- Output: predicted future monthly spending
+- Uses lag features and rolling averages
+
+### `/predict_fraud` (POST)
+- Input: transaction details (amount, MCC, merchant, time, etc.)
+- Output:
+  - Fraud prediction (Yes/No)
+  - Fraud probability (%)
+  - Final decision label
+
+---
+
+## Key Concepts Used
+
+### JSON Communication
+Flask sends and receives data using JSON format:
+```json
+{
+  "total_transactions": 19963,
+  "fraud_rate": 0.135
+}
