@@ -483,4 +483,35 @@ This phase demonstrates:
 ✔ Spending Prediction API working  
 ✔ Dashboard APIs integrated  
 ✔ Models loaded at runtime  
-✔ JSON communication established     
+✔ JSON communication established                                                                                                                                        .
+# Phase 9 – Dashboard Development
+
+## Objective
+
+Built an interactive web dashboard to present business analytics and machine learning predictions in a user-friendly interface.
+
+## Work Completed
+
+- Designed a responsive dashboard layout using Bootstrap.
+- Added KPI cards for important business metrics.
+- Connected the frontend to Flask API endpoints using JavaScript Fetch API.
+- Implemented four interactive Chart.js visualizations:
+  - Yearly Spending
+  - Category Spending
+  - Fraud by Payment Method
+  - Festive Spending
+- Developed a spending prediction interface that communicates with the backend model.
+- Developed a fraud prediction form allowing users to enter transaction details and receive fraud risk predictions.
+- Displayed prediction results dynamically without refreshing the page.
+
+## Key Learning
+
+- Building REST API integrations using Fetch API.
+- Displaying dynamic data from Flask in a web interface.
+- Creating interactive charts with Chart.js.
+- Connecting trained machine learning models to a frontend application.
+- Designing responsive dashboards using Bootstrap components.
+
+## Outcome
+
+Completed a fully functional financial transaction intelligence dashboard that combines business analytics, interactive visualizations, spending forecasting, and fraud detection into a single web application.

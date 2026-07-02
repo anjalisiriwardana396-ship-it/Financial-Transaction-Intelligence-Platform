@@ -230,5 +230,39 @@ Flask sends and receives data using JSON format:
 ```json
 {
   "total_transactions": 19963,
-  "fraud_rate": 0.135
-}
+  "fraud_rate": 0.135}
+                                                                                                                                                   --------------------------------                                                                                                                   ## Phase 9 – Interactive Dashboard
+
+An interactive web dashboard was developed using HTML, CSS, JavaScript, Bootstrap, and Chart.js to visualize business insights and machine learning predictions.
+
+### Dashboard Features
+
+- KPI cards displaying:
+  - Total Transactions
+  - Total Spending
+  - Average Transaction Value
+  - Fraud Rate
+  - Best Fraud Detection Model
+
+- Interactive charts:
+  - Yearly Spending Trend
+  - Spending by Category
+  - Fraud Cases by Payment Method
+  - Spending During Festive Periods
+
+- Spending Prediction section
+  - Predicts future monthly spending using the trained Linear Regression model.
+
+- Fraud Detection section
+  - Accepts transaction details from the user.
+  - Predicts whether the transaction is fraudulent.
+  - Displays fraud probability and final prediction.
+
+### Technologies Used
+
+- HTML5
+- CSS3
+- Bootstrap 5
+- JavaScript (ES6)
+- Chart.js
+- Flask REST API
