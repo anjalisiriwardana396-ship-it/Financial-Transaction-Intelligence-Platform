@@ -231,7 +231,7 @@ Flask sends and receives data using JSON format:
 {
   "total_transactions": 19963,
   "fraud_rate": 0.135}
-                                                                                                                                                   --------------------------------                                                                                                                   ## Phase 9 – Interactive Dashboard
+                                                                                                                                                   --------------------------------                                                         ## Phase 9 – Interactive Dashboard
 
 An interactive web dashboard was developed using HTML, CSS, JavaScript, Bootstrap, and Chart.js to visualize business insights and machine learning predictions.
 
@@ -265,4 +265,30 @@ An interactive web dashboard was developed using HTML, CSS, JavaScript, Bootstra
 - Bootstrap 5
 - JavaScript (ES6)
 - Chart.js
-- Flask REST API
+- Flask REST API                                                                         -----------------------------------------------------------------------------------------## Phase 10 – Model Explainability with SHAP
+ 
+To improve model transparency and interpretability, SHAP (SHapley Additive exPlanations) was used to explain how the fraud detection model makes its predictions.
+
+### Features
+
+- Loaded the trained Random Forest fraud detection model.
+- Processed transaction data using the same preprocessing pipeline as model training.
+- Explained model predictions on a random sample of 200 transactions.
+- Generated an overall feature importance visualization using SHAP.
+- Generated a SHAP summary plot showing both feature importance and the direction of each feature's impact.
+- Ranked features based on their average SHAP importance scores.
+- Identified the most and least influential features affecting fraud predictions.
+
+### Outputs
+
+- `09_shap_bar.png` – Overall feature importance.
+- `10_shap_dot.png` – SHAP summary plot showing feature impact and direction.
+- Console output containing the ranked feature importance table.
+
+### Technologies Used
+
+- SHAP
+- Random Forest
+- Pandas
+- NumPy
+- Matplotlib

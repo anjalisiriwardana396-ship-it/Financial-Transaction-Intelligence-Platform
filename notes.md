@@ -514,4 +514,31 @@ Built an interactive web dashboard to present business analytics and machine lea
 
 ## Outcome
 
-Completed a fully functional financial transaction intelligence dashboard that combines business analytics, interactive visualizations, spending forecasting, and fraud detection into a single web application.
+Completed a fully functional financial transaction intelligence dashboard that combines business analytics, interactive visualizations, spending forecasting, and fraud detection into a single web application.                                                 -
+## Phase 10 – SHAP Model Explainability
+## Objective
+
+Improve the transparency of the fraud detection model by explaining which transaction features contribute most to fraud predictions.
+
+## Work Completed
+
+- Loaded the trained fraud detection model and preprocessing artifacts.
+- Prepared transaction data using the same feature encoding applied during model training.
+- Selected a random sample of 200 transactions for efficient explainability analysis.
+- Used SHAP TreeExplainer to compute feature contributions for each prediction.
+- Generated:
+  - SHAP Feature Importance Bar Chart
+  - SHAP Summary Dot Plot
+- Calculated average SHAP values to rank feature importance.
+- Identified the most and least influential features affecting fraud detection.
+
+## Key Learning
+
+- Understanding Explainable AI (XAI) concepts.
+- Using SHAP to interpret machine learning predictions.
+- Visualizing both feature importance and feature impact direction.
+- Improving model transparency and trustworthiness for real-world applications.
+
+## Outcome
+
+Successfully integrated Explainable AI into the fraud detection system, providing clear visual explanations of how the Random Forest model makes predictions and which transaction features have the greatest influence on fraud classification.
