@@ -156,7 +156,7 @@ Because the test set contained only **5 fraud cases**, Precision and Recall are 
 - Seasonal spending increased during New Year, Christmas, and Avurudu periods.
 - Random Forest achieved the highest ROC-AUC among the evaluated fraud detection models.
 - Transaction hour and merchant category were the strongest predictors of fraud.                                                                                                                                             
-#  Phase 8 — Flask Web Application (Deployment Layer)
+###  Flask Web Application (Deployment Layer)
 ## What is Flask?
 
 Flask is a lightweight Python web framework that allows us to convert our machine learning models into a working web application. It acts as a backend server that connects our trained models to a browser-based dashboard.
@@ -233,7 +233,7 @@ Flask sends and receives data using JSON format:```json
   "total_transactions": 19963,
   "fraud_rate": 0.135}
 
-## Phase 9 – Interactive Dashboard
+## Interactive Dashboard
 
 An interactive web dashboard was developed using HTML, CSS, JavaScript, Bootstrap, and Chart.js to visualize business insights and machine learning predictions.
 
@@ -269,7 +269,7 @@ An interactive web dashboard was developed using HTML, CSS, JavaScript, Bootstra
 - Chart.js
 - Flask REST API
 
-# Phase 10 – Model Explainability with SHAP
+## Model Explainability with SHAP
  
 To improve model transparency and interpretability, SHAP (SHapley Additive exPlanations) was used to explain how the fraud detection model makes its predictions.
 
@@ -297,8 +297,8 @@ To improve model transparency and interpretability, SHAP (SHapley Additive exPla
 - NumPy
 - Matplotlib
 
-###############################################
-Power BI Analytics Dashboard
+
+## Power BI Analytics Dashboard
 
 The FinancialIQ Power BI dashboard provides interactive business intelligence insights from historical transaction data.
 
