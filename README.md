@@ -1,356 +1,583 @@
-## Dataset Overview                                        
+Project Overview
 
-* 19,963 credit card transactions
-* 15 original features
-* Transaction history from 2002–2020
-* Includes merchant details, payment methods, MCC codes, and fraud labels
+FinancialIQ is an end-to-end Financial Transaction Intelligence Platform that combines Machine Learning, Explainable AI, Business Intelligence, and Web Technologies to analyze financial transactions, detect fraudulent activities, and discover customer spending patterns.
 
-## Initial Findings
+The project processes nearly 20,000 credit card transactions, performs data cleaning and feature engineering, develops machine learning models for fraud detection, explains model decisions using SHAP, deploys predictions through a Flask REST API, and provides interactive business insights through a Power BI dashboard.
 
-* The `Amount` column contains currency symbols and requires preprocessing.
-* Missing values exist in `Merchant State`, `Zip`, and `Errors?`.
-* Fraud transactions are extremely rare: only **27 out of 19,963 transactions (0.135%)**.
-* Swipe transactions account for the majority of all transactions.
+The platform demonstrates how data science can support both:
 
-## Challenges
+Real-time fraud monitoring
+Business decision-making through interactive analytics
 
-The fraud detection task presents a severe class imbalance problem. Because fraudulent transactions represent only 0.135% of the data, accuracy alone is not a reliable metric. The project addresses this by applying SMOTE on the training data and evaluating the model using precision, recall, ROC-AUC, and confusion matrices.
-## Data Cleaning Performed                        
-The following preprocessing steps were applied to make the dataset analysis-ready:
+by combining predictive modeling with explainable insights.
 
-- Removed `$` symbol from `Amount` and converted it to numeric type
-- Combined `Year`, `Month`, and `Day` into a single `Date` column
-- Filled missing values:
-  - `Merchant State` → "Unknown"
-  - `Zip` → 0
-  - `Errors?` → "No Error"
-- Removed duplicate transactions
-- Created new features:
-  - `DayOfWeek` (weekday pattern analysis)
-  - `Hour` (transaction time behavior)
-  - `Festive period` (festive spending patterns)
-  - `Category` (mapped from MCC codes)                                
-## Key EDA Insights                                                       
-- Total spending across dataset :1.62M across 19963 transactions
-- Average transaction value: $81.30
-- Spending is relatively stable across years (no major long-term growth trend)
+Dashboard Preview
+Executive Overview
 
-### Category Behavior
-- Highest spending occurs in:
-  - Other, Pharmacy, Grocery categories
-- Utilities and Wholesale have higher average transaction values
+Fraud Analytics
 
-### Fraud Behavior
-- Online transactions show the highest fraud rate (~1.14%)
-- Chip transactions are the most secure (~0.04% fraud rate)
-
-### Time-Based Insights
-- Spending is distributed fairly evenly across weekdays
-- Significant spending spike observed at Hour 6 (requires further investigation)
-
-### Seasonal Trends
-- Strong spending peaks during:
-  - New Year
-  - Christmas
-  - Avurudu (regional seasonal effect)
-
-### Geographic Insights
-- Spending is concentrated in a few cities like La Verne, Mira Loma, and Monterey Park
-- Online transactions also form a significant portion of activity                                                                 
-## Spending PREDICTION MODEL                                           
-To forecast future credit card spending, a time-series regression model was built using historical transaction data (2002–2020).
-
-### Approach
-- Aggregated 19,963 transactions into monthly totals
-- Engineered time-series features:
-  - Lag1, Lag2, Lag3 (previous months' spending)
-  - Rolling 3-month average
-  - Month, Year, and festive indicators
-- Trained a Linear Regression model
-
-### Why this approach
-Simple regression was chosen for interpretability and explainability in a financial context.
-
-### Model Performance
-- MAE (Mean Absolute Error): ~$706.80
-- Average monthly spending: ~$8,000
-- Error rate: ~8–9%
-
-### Key Insight
-- Model captures overall trend correctly
-- Fails to capture sudden dips/spikes (expected limitation of linear models)
-- Spending remains relatively stable in later years (~$7.6K–$7.8K forecasted)
-
-### Business Value
-- Helps estimate future cash flow
-- Useful for personal finance tracking or banking analytics dashboards
-                                 l
-## FRAUD DETECTION MODEL                          
-The dataset contains **19,963 transactions**, but only **27 fraudulent transactions (0.135%)**, making fraud detection a highly imbalanced classification problem.
-
-A model trained directly on this dataset would achieve approximately **99.8% accuracy** simply by predicting every transaction as legitimate. Therefore, accuracy was not used as the primary evaluation metric.
-
-### Approach
-
-- Selected transaction features available at prediction time:
-  - Amount
-  - Hour
-  - Merchant Category Code (MCC)
-  - Payment Method
-  - Merchant State
-  - Error Status
-  - Month
-  - Day of Week
-- Encoded categorical variables using LabelEncoder.
-- Split the dataset into training and testing sets using stratified sampling.
-- Applied **SMOTE** only to the training data to prevent data leakage.
-- Compared three machine learning models:
-  - Logistic Regression
-  - Random Forest
-  - XGBoost
-- Selected the best-performing model using ROC-AUC.
-
-### Model Performance
-
-| Model | Precision | Recall | F1-Score | ROC-AUC |
-|-------|----------:|--------:|---------:|---------:|
-| Logistic Regression | 0.003 | 0.400 | 0.006 | 0.8410 |
-| Random Forest | **0.250** | 0.200 | **0.222** | **0.9809** |
-| XGBoost | 0.200 | 0.200 | 0.200 | 0.9342 |
-
-**Selected Model:** Random Forest
-
-### Feature Importance
-
-The Random Forest model identified the following features as the strongest indicators of fraudulent transactions:
-
-1. Hour of transaction
-2. Merchant Category Code (MCC)
-3. Merchant State
-4. Payment Method
-5. Month
-6. Transaction Amount
-7. Day of Week
-8. Error Status
-
-### Business Value
-
-This model demonstrates how machine learning can assist financial institutions by:
-
-- Identifying potentially fraudulent transactions in real time.
-- Prioritizing suspicious transactions for manual investigation.
-- Reducing financial losses due to fraud.
-- Supporting risk monitoring through explainable feature importance.
-
-### Limitations
-
-Because the test set contained only **5 fraud cases**, Precision and Recall are highly sensitive to individual predictions. For this reason, **ROC-AUC** provides a more reliable measure of overall model performance than accuracy.              
-## Model Results
-| Model | Metric | Score |
-|------|--------|--------|
-| Spending Prediction | MAE | **$706.80** |
-| Fraud Detection | ROC-AUC | **0.9809** |           #
-## Key Findings
-- Online transactions showed the highest fraud rate.
-- Spending remained relatively stable throughout the later years of the dataset.
-- Seasonal spending increased during New Year, Christmas, and Avurudu periods.
-- Random Forest achieved the highest ROC-AUC among the evaluated fraud detection models.
-- Transaction hour and merchant category were the strongest predictors of fraud.                                                                                                                                             
-###  Flask Web Application (Deployment Layer)
-## What is Flask?
-
-Flask is a lightweight Python web framework that allows us to convert our machine learning models into a working web application. It acts as a backend server that connects our trained models to a browser-based dashboard.
-
-Instead of just running models in Python scripts, Flask allows users to interact with predictions through a website.
+Customer Behavioral Analytics
 
 
+Dataset Overview
 
-## What are we building?
+The dataset contains historical credit card transactions used to demonstrate financial analytics and fraud detection techniques.
 
-We are building a Flask backend that serves a financial intelligence dashboard with two main capabilities:
+Dataset Statistics
+Total Transactions: 19,963
+Original Features: 15
+Time Period: 2002 - 2020
+Target Variable: Fraud Label
+Dataset Includes
+Transaction amount
+Transaction date
+Merchant information
+Merchant Category Code (MCC)
+Payment method
+Geographic information
+Fraud indicators
 
-### 1. Spending Analytics Dashboard
-- Total transactions
-- Total spending
-- Fraud rate
-- Category-wise insights
-- Yearly and festive trends
+The original dataset is not included in this repository due to privacy and licensing considerations.
 
-### 2. Machine Learning APIs
-- Spending prediction (time-series forecasting model)
-- Fraud detection (classification model)
+The project was developed using this dataset to demonstrate a complete financial intelligence workflow including:
 
+Data preprocessing
+Exploratory analysis
+Machine learning
+Explainable AI
+Dashboard development
+Data Cleaning and Feature Engineering
 
+The raw dataset required preprocessing before analysis and model development.
 
-## Flask API Routes
+Data Cleaning Steps
 
-The application exposes the following endpoints:
+The following transformations were performed:
 
-### `/`
-- Loads the main dashboard (HTML frontend)
+Amount Processing
+Removed currency symbols from the Amount column.
+Converted transaction amounts into numerical format.
+Date Processing
 
-### `/summary`
-Returns KPI-level financial metrics:
-- Total transactions
-- Total spending
-- Average transaction value
-- Fraud count and fraud rate
-- Best performing fraud detection model
+Combined:
 
-### `/insights`
-Returns business insights such as:
-- Online transaction fraud rate
-- Highest spending category
-- Peak festive period
-- Peak spending year
+Year
+Month
+Day
 
-### `/chart_data`
-Provides structured data for frontend visualizations:
-- Yearly spending trend
-- Category-wise spending
-- Fraud by payment method
-- Festive period spending
+into a single transaction date column.
 
-### `/predict_spending` (POST)
-- Input: number of months ahead (1–12)
-- Output: predicted future monthly spending
-- Uses lag features and rolling averages
+Missing Value Handling
 
-### `/predict_fraud` (POST)
-- Input: transaction details (amount, MCC, merchant, time, etc.)
-- Output:
-  - Fraud prediction (Yes/No)
-  - Fraud probability (%)
-  - Final decision label
+Missing values were handled as follows:
 
+Column	Handling
+Merchant State	Replaced with "Unknown"
+Zip Code	Replaced with 0
+Errors	Replaced with "No Error"
+Duplicate Removal
 
+Duplicate transaction records were removed to improve data quality.
 
-## Key Concepts Used
+Feature Engineering
 
-### JSON Communication
-Flask sends and receives data using JSON format:```json
+Additional features were created to capture customer behavior and transaction patterns.
+
+Time-Based Features
+Hour
+Day of Week
+Month
+Transaction Behavior Features
+Festive Period Classification
+Merchant Category Mapping from MCC codes
+
+These features helped improve fraud detection performance and enabled deeper business analysis.
+Exploratory Data Analysis (EDA)
+
+Exploratory Data Analysis was performed to understand transaction behavior, spending patterns, and fraud characteristics within the dataset.
+
+Key Transaction Insights
+Overall Transaction Statistics
+Total Transactions: 19,963
+Total Spending: $1.62M
+Average Transaction Value: $81.30
+
+The dataset shows relatively stable spending behavior across the analyzed period, with no major long-term growth or decline patterns.
+
+Category Spending Analysis
+
+Merchant categories were analyzed to identify customer spending preferences.
+
+Highest Spending Categories
+
+The highest total spending was observed in:
+
+Other Categories
+Pharmacy
+Grocery
+Wholesale
+Department Stores
+Category Insights
+Grocery and Pharmacy represent frequent customer spending behavior.
+Wholesale transactions contain higher average transaction values.
+Merchant category information provides useful behavioral signals for fraud detection.
+Fraud Analysis
+
+Fraud transactions are extremely rare in this dataset.
+
+Fraud Statistics
+Fraud Transactions: 27
+Fraud Rate: 0.135%
+
+Because fraudulent transactions represent a very small percentage of the dataset, fraud detection becomes a highly imbalanced classification problem.
+
+Fraud Behavior Insights
+Payment Method Analysis
+
+Fraud rates vary significantly depending on payment method.
+
+Key findings:
+
+Online transactions show the highest fraud rate (~1.14%).
+Swipe transactions show moderate fraud activity.
+Chip transactions show the lowest fraud rate (~0.04%).
+
+This suggests online transactions require stronger monitoring and verification mechanisms.
+
+Time-Based Analysis
+
+Transaction timing patterns were analyzed using hour-based and day-based features.
+
+Key findings:
+
+Spending patterns vary throughout the day.
+A significant transaction concentration appears around 06:00, requiring further investigation as a potential data quality issue.
+Day-of-week spending remains relatively consistent.
+Seasonal Spending Analysis
+
+Customer spending patterns were analyzed across seasonal periods.
+
+Higher spending activity was observed during:
+
+New Year
+Christmas
+Avurudu seasonal period
+
+These patterns demonstrate how seasonal events influence financial behavior.
+
+Geographic Analysis
+
+Geographic transaction patterns were explored using merchant location information.
+
+Key observations:
+
+Spending is concentrated in several cities.
+Online transactions contribute significantly to overall activity.
+Location-based behavior can provide additional fraud detection signals.
+Fraud Detection Model
+
+The main machine learning objective of FinancialIQ is detecting potentially fraudulent transactions.
+
+The dataset contains:
+
+19,963 transactions
+Only 27 fraudulent transactions
+
+This creates a severe class imbalance problem.
+
+A model predicting every transaction as legitimate could achieve approximately 99.8% accuracy, but it would fail to detect fraud.
+
+Therefore, accuracy was not considered a suitable evaluation metric.
+
+Machine Learning Approach
+
+The following workflow was implemented:
+
+Selected transaction features available during prediction.
+Encoded categorical variables.
+Applied stratified train-test splitting.
+Used SMOTE only on training data to handle class imbalance.
+Trained multiple classification models.
+Compared performance using ROC-AUC and fraud detection metrics.
+Features Used
+
+The fraud detection model uses the following features:
+
+Transaction Amount
+Transaction Hour
+Merchant Category Code (MCC)
+Payment Method
+Merchant State
+Error Status
+Month
+Day of Week
+Models Evaluated
+
+Three machine learning algorithms were compared:
+
+Logistic Regression
+Random Forest
+XGBoost
+Model Performance
+Model	Precision	Recall	F1-Score	ROC-AUC
+Logistic Regression	0.003	0.400	0.006	0.8410
+Random Forest	0.250	0.200	0.222	0.9809
+XGBoost	0.200	0.200	0.200	0.9342
+Selected Model
+
+Random Forest was selected as the final fraud detection model because it achieved the highest ROC-AUC score.
+
+Model Evaluation
+
+The final model achieved:
+
+ROC-AUC: 0.9809
+Precision: 0.25
+Recall: 0.20
+
+ROC-AUC was selected as the primary evaluation metric because the dataset contains very few fraud examples.
+
+Feature Importance
+
+The Random Forest model identified the following features as the strongest fraud indicators:
+
+Transaction Hour
+Merchant Category Code (MCC)
+Merchant State
+Payment Method
+Month
+Transaction Amount
+Day of Week
+Error Status
+Business Value
+
+The fraud detection model can support financial monitoring by:
+
+Prioritizing suspicious transactions.
+Assisting manual fraud investigations.
+Identifying risky transaction patterns.
+Supporting real-time fraud screening systems.
+Model Limitations
+
+Although the model achieved strong ROC-AUC performance, several limitations exist:
+
+Only 27 fraud cases are available in the dataset.
+Test evaluation contains very few fraud examples.
+Precision and recall values are sensitive to individual predictions.
+The dataset represents a single-user transaction history and is not suitable for direct production deployment.
+
+A production system would require:
+
+Larger multi-user datasets.
+Continuous model retraining.
+Real-time transaction streams.
+Probability calibration.
+Model Explainability with SHAP
+
+Machine learning models can be difficult to interpret. To improve transparency, SHAP (SHapley Additive exPlanations) was used.
+
+SHAP explains how each feature contributes to individual predictions and overall model behavior.
+
+SHAP Implementation
+
+The following steps were performed:
+
+Loaded the trained Random Forest model.
+Applied the same preprocessing pipeline used during training.
+Generated explanations for a sample of transactions.
+Calculated global feature importance.
+Created SHAP visualizations.
+SHAP Outputs
+
+The analysis produced:
+
+Feature Importance Plot
+
+Shows the overall importance of each feature in fraud predictions.
+
+Output:
+
+09_shap_bar.png
+SHAP Summary Plot
+
+Shows:
+
+Feature importance ranking.
+Whether features increase or decrease fraud risk.
+Distribution of feature impact.
+
+Output:
+
+10_shap_dot.png
+
+Flask Application (Deployment Layer)
+
+To make the machine learning model usable outside the development environment, a Flask-based web application was developed.
+
+Flask acts as the backend layer that connects:
+
+Machine learning models
+Processed transaction data
+Interactive web interfaces
+
+The application allows users to access financial insights and perform fraud predictions through API endpoints.
+
+Flask Application Features
+
+The Flask application provides two main capabilities:
+
+1. Financial Analytics Dashboard
+
+Provides financial summaries including:
+
+Total transactions
+Total spending
+Average transaction value
+Fraud statistics
+Category-level analysis
+Spending trends
+2. Fraud Detection API
+
+The application accepts transaction details and returns:
+
+Fraud prediction
+Risk probability
+Final classification result
+
+Example workflow:
+
+User Transaction Input
+          |
+          ▼
+Flask API
+          |
+          ▼
+Machine Learning Model
+          |
+          ▼
+Fraud Risk Prediction
+Flask API Routes
+/
+
+Loads the main dashboard interface.
+
+/summary
+
+Returns key financial metrics:
+
+Total transactions
+Total spending
+Average transaction amount
+Fraud count
+Fraud rate
+Selected machine learning model
+/insights
+
+Provides automated business insights:
+
+Highest spending category
+Fraud-prone payment methods
+Peak spending periods
+Seasonal trends
+/chart_data
+
+Provides structured data for visualization:
+
+Yearly spending trends
+Category spending
+Payment method analysis
+Seasonal spending patterns
+/predict_fraud (POST)
+
+Accepts transaction information and returns fraud assessment.
+
+Input Example
 {
-  "total_transactions": 19963,
-  "fraud_rate": 0.135}
+  "amount": 250,
+  "hour": 23,
+  "payment_method": "Online",
+  "merchant_category": "Electronics"
+}
+Output Example
+{
+  "prediction": "Fraud",
+  "risk_score": 0.82
+}
+Interactive Web Dashboard
 
-## Interactive Dashboard
+A browser-based financial intelligence dashboard was developed using:
 
-An interactive web dashboard was developed using HTML, CSS, JavaScript, Bootstrap, and Chart.js to visualize business insights and machine learning predictions.
+HTML5
+CSS3
+Bootstrap 5
+JavaScript
+Chart.js
+Flask REST API
+Dashboard Features
+Financial Overview
 
-### Dashboard Features
+Displays:
 
-- KPI cards displaying:
-  - Total Transactions
-  - Total Spending
-  - Average Transaction Value
-  - Fraud Rate
-  - Best Fraud Detection Model
+Total Transactions
+Total Spending
+Average Transaction Value
+Fraud Rate
+Model Performance
+Interactive Visualizations
 
-- Interactive charts:
-  - Yearly Spending Trend
-  - Spending by Category
-  - Fraud Cases by Payment Method
-  - Spending During Festive Periods
+Includes:
 
-- Spending Prediction section
-  - Predicts future monthly spending using the trained Linear Regression model.
+Yearly spending trends
+Spending by merchant category
+Fraud distribution by payment method
+Seasonal spending patterns
+Fraud Prediction Interface
 
-- Fraud Detection section
-  - Accepts transaction details from the user.
-  - Predicts whether the transaction is fraudulent.
-  - Displays fraud probability and final prediction.
+Users can enter transaction details and receive:
 
-### Technologies Used
+Fraud prediction
+Risk score
+Model-based decision output
+Power BI Analytics Dashboard
 
-- HTML5
-- CSS3
-- Bootstrap 5
-- JavaScript (ES6)
-- Chart.js
-- Flask REST API
+The FinancialIQ Power BI dashboard provides interactive business intelligence insights from transaction data.
 
-## Model Explainability with SHAP
- 
-To improve model transparency and interpretability, SHAP (SHapley Additive exPlanations) was used to explain how the fraud detection model makes its predictions.
+The dashboard focuses on:
 
-### Features
+Financial overview
+Fraud monitoring
+Customer behavioral analysis
+Dashboard Pages
+1. Executive Overview
 
-- Loaded the trained Random Forest fraud detection model.
-- Processed transaction data using the same preprocessing pipeline as model training.
-- Explained model predictions on a random sample of 200 transactions.
-- Generated an overall feature importance visualization using SHAP.
-- Generated a SHAP summary plot showing both feature importance and the direction of each feature's impact.
-- Ranked features based on their average SHAP importance scores.
-- Identified the most and least influential features affecting fraud predictions.
+Provides a high-level summary of financial activity.
 
-### Outputs
+Key Metrics
+Total transactions
+Total spending
+Average transaction value
+Fraud rate
+Visualizations
+Spending trends over time
+Payment method distribution
+Top spending categories
+Transaction summary
 
-- `09_shap_bar.png` – Overall feature importance.
-- `10_shap_dot.png` – SHAP summary plot showing feature impact and direction.
-- Console output containing the ranked feature importance table.
+Screenshot:
 
-### Technologies Used
+2. Fraud Analytics
 
-- SHAP
-- Random Forest
-- Pandas
-- NumPy
-- Matplotlib
+Focuses on identifying suspicious transaction patterns.
 
+Analysis Includes
+Fraud cases by payment method
+Fraud trends over time
+Fraud distribution by hour
+Fraud category analysis
+Fraud loss analysis
 
-## Power BI Analytics Dashboard
+Screenshot:
 
-The FinancialIQ Power BI dashboard provides interactive business intelligence insights from historical transaction data.
+3. Customer Behavioral Analytics
 
-### Dashboard Pages
+Analyzes normal customer spending behavior.
 
-#### 1. Executive Overview
-Provides a high-level view of financial activity including:
+Insights Include
+Hourly spending patterns
+Weekly transaction trends
+Seasonal spending behavior
+Merchant category analysis
+Geographic spending distribution
 
-- Total transactions
-- Total spending
-- Average transaction value
-- Fraud metrics
-- Spending trends
-- Payment method analysis
-- Top spending categories
+Screenshot:
 
+Technologies Used
+Machine Learning
+Python
+Pandas
+NumPy
+Scikit-learn
+XGBoost
+Imbalanced-learn (SMOTE)
+SHAP
+Backend
+Flask
+REST API
+JSON
+Frontend
+HTML5
+CSS3
+Bootstrap 5
+JavaScript
+Chart.js
+Business Intelligence
+Microsoft Power BI
+DAX
+Data Modeling
+Interactive Visualization
+Results
+Component	Metric / Outcome
+Dataset Size	19,963 transactions
+Total Spending Analyzed	$1.62M
+Fraud Cases	27
+Fraud Rate	0.135%
+Fraud Detection Model	Random Forest
+Fraud Model ROC-AUC	0.9809
+Key Findings
+Online transactions showed the highest fraud rate compared to other payment methods.
+Transaction hour and merchant category were important indicators of fraudulent activity.
+Random Forest achieved the strongest fraud detection performance among evaluated models.
+Spending behavior remained relatively stable across the analyzed period.
+Seasonal events such as New Year, Christmas, and Avurudu showed increased spending activity.
+Explainable AI using SHAP improved understanding of model decisions.
+Project Structure
+FinancialIQ/
+│
+├── Data/
+│   └── cleaned_transactions.csv
+│
+├── Machine_Learning/
+│   ├── fraud_detection_model/
+│   ├── notebooks/
+│   └── shap_analysis/
+│
+├── Flask_App/
+│   ├── app.py
+│   ├── models/
+│   ├── templates/
+│   └── static/
+│
+├── PowerBI_Dashboard/
+│   └── Screenshots/
+│
+├── Reports/
+│
+├── README.md
+│
+└── requirements.txt
+Future Improvements
 
-![Executive Overview](PowerBI_Dashboard/Screenshots/Executive_Overview.png)
+Future enhancements planned for FinancialIQ include:
 
+Machine Learning Improvements
+Train models using larger multi-user datasets.
+Apply advanced anomaly detection techniques.
+Perform probability calibration.
+Implement real-time fraud streaming.
+Dashboard Improvements
+Add customer segmentation.
+Add predictive analytics pages.
+Add automated anomaly alerts.
+Integrate live transaction monitoring.
+Deployment Improvements
+Deploy Flask API using cloud services.
+Containerize application using Docker.
+Implement CI/CD pipeline.
+Add authentication and security controls.
+License
 
-#### 2. Fraud Analytics
+This project is developed for educational and portfolio purposes.
 
-Analyzes suspicious transaction patterns through:
+The dataset used in this project is not included due to privacy and licensing restrictions.
 
-- Fraud cases by payment method
-- Fraud trends over time
-- Fraud distribution by hour
-- Fraud categories
-- Fraud loss analysis
-
-
-![Fraud Analytics](PowerBI_Dashboard/Screenshots/Fraud_Analytics.png)
-
-
-#### 3. Customer Behavioral Analytics
-
-Explores normal spending behavior through:
-
-- Hourly spending patterns
-- Weekly spending trends
-- Seasonal spending analysis
-- Merchant categories
-- Geographic spending patterns
-
-
-![Behavioral Analytics](PowerBI_Dashboard/Screenshots/Behavioral_Analytics.png)
-
-
-### Technologies Used
-
-- Microsoft Power BI
-- DAX
-- Data Modeling
-- Interactive Visualization
-- Business Intelligence Analytics
+You are free to explore the implementation, learning concepts, and techniques demonstrated in this repository.
