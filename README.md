@@ -1,4 +1,4 @@
-## Dataset Overview                                         -------------------
+## Dataset Overview                                        
 
 * 19,963 credit card transactions
 * 15 original features
@@ -15,7 +15,7 @@
 ## Challenges
 
 The fraud detection task presents a severe class imbalance problem. Because fraudulent transactions represent only 0.135% of the data, accuracy alone is not a reliable metric. The project addresses this by applying SMOTE on the training data and evaluating the model using precision, recall, ROC-AUC, and confusion matrices.
-## Data Cleaning Performed                          ---------------------------
+## Data Cleaning Performed                        
 The following preprocessing steps were applied to make the dataset analysis-ready:
 
 - Removed `$` symbol from `Amount` and converted it to numeric type
@@ -30,8 +30,9 @@ The following preprocessing steps were applied to make the dataset analysis-read
   - `Hour` (transaction time behavior)
   - `Festive period` (festive spending patterns)
   - `Category` (mapped from MCC codes)                                
-## Key EDA Insights -------------------                                                         
-- Total spending across dataset :1.62M across 19963 transactions                                        - Average transaction value: $81.30
+## Key EDA Insights                                                       
+- Total spending across dataset :1.62M across 19963 transactions
+- Average transaction value: $81.30
 - Spending is relatively stable across years (no major long-term growth trend)
 
 ### Category Behavior
@@ -56,7 +57,7 @@ The following preprocessing steps were applied to make the dataset analysis-read
 ### Geographic Insights
 - Spending is concentrated in a few cities like La Verne, Mira Loma, and Monterey Park
 - Online transactions also form a significant portion of activity                                                                 
-## Spending PREDICTION MODEL                                            -------------------------------
+## Spending PREDICTION MODEL                                           
 To forecast future credit card spending, a time-series regression model was built using historical transaction data (2002–2020).
 
 ### Approach
@@ -82,9 +83,10 @@ Simple regression was chosen for interpretability and explainability in a financ
 
 ### Business Value
 - Helps estimate future cash flow
-- Useful for personal finance tracking or banking analytics dashboards                                l
-## FRAUD DETECTION MODEL   ------------------------                            
-                                                     The dataset contains **19,963 transactions**, but only **27 fraudulent transactions (0.135%)**, making fraud detection a highly imbalanced classification problem.
+- Useful for personal finance tracking or banking analytics dashboards
+                                 l
+## FRAUD DETECTION MODEL                          
+The dataset contains **19,963 transactions**, but only **27 fraudulent transactions (0.135%)**, making fraud detection a highly imbalanced classification problem.
 
 A model trained directly on this dataset would achieve approximately **99.8% accuracy** simply by predicting every transaction as legitimate. Therefore, accuracy was not used as the primary evaluation metric.
 
@@ -161,7 +163,7 @@ Flask is a lightweight Python web framework that allows us to convert our machin
 
 Instead of just running models in Python scripts, Flask allows users to interact with predictions through a website.
 
----
+
 
 ## What are we building?
 
@@ -178,7 +180,7 @@ We are building a Flask backend that serves a financial intelligence dashboard w
 - Spending prediction (time-series forecasting model)
 - Fraud detection (classification model)
 
----
+
 
 ## Flask API Routes
 
@@ -221,17 +223,17 @@ Provides structured data for frontend visualizations:
   - Fraud probability (%)
   - Final decision label
 
----
+
 
 ## Key Concepts Used
 
 ### JSON Communication
-Flask sends and receives data using JSON format:
-```json
+Flask sends and receives data using JSON format:```json
 {
   "total_transactions": 19963,
   "fraud_rate": 0.135}
-                                                                                                                                                   --------------------------------                                                         ## Phase 9 – Interactive Dashboard
+
+## Phase 9 – Interactive Dashboard
 
 An interactive web dashboard was developed using HTML, CSS, JavaScript, Bootstrap, and Chart.js to visualize business insights and machine learning predictions.
 
@@ -265,7 +267,9 @@ An interactive web dashboard was developed using HTML, CSS, JavaScript, Bootstra
 - Bootstrap 5
 - JavaScript (ES6)
 - Chart.js
-- Flask REST API                                                                         -----------------------------------------------------------------------------------------## Phase 10 – Model Explainability with SHAP
+- Flask REST API
+
+# Phase 10 – Model Explainability with SHAP
  
 To improve model transparency and interpretability, SHAP (SHapley Additive exPlanations) was used to explain how the fraud detection model makes its predictions.
 
@@ -292,3 +296,61 @@ To improve model transparency and interpretability, SHAP (SHapley Additive exPla
 - Pandas
 - NumPy
 - Matplotlib
+
+###############################################
+Power BI Analytics Dashboard
+
+The FinancialIQ Power BI dashboard provides interactive business intelligence insights from historical transaction data.
+
+### Dashboard Pages
+
+#### 1. Executive Overview
+Provides a high-level view of financial activity including:
+
+- Total transactions
+- Total spending
+- Average transaction value
+- Fraud metrics
+- Spending trends
+- Payment method analysis
+- Top spending categories
+
+
+![Executive Overview](PowerBI_Dashboard/Screenshots/Executive_Overview.png)
+
+
+#### 2. Fraud Analytics
+
+Analyzes suspicious transaction patterns through:
+
+- Fraud cases by payment method
+- Fraud trends over time
+- Fraud distribution by hour
+- Fraud categories
+- Fraud loss analysis
+
+
+![Fraud Analytics](PowerBI_Dashboard/Screenshots/Fraud_Analytics.png)
+
+
+#### 3. Customer Behavioral Analytics
+
+Explores normal spending behavior through:
+
+- Hourly spending patterns
+- Weekly spending trends
+- Seasonal spending analysis
+- Merchant categories
+- Geographic spending patterns
+
+
+![Behavioral Analytics](PowerBI_Dashboard/Screenshots/Behavioral_Analytics.png)
+
+
+### Technologies Used
+
+- Microsoft Power BI
+- DAX
+- Data Modeling
+- Interactive Visualization
+- Business Intelligence Analytics
