@@ -506,31 +506,7 @@ Spending behavior remained relatively stable across the analyzed period.
 Seasonal events such as New Year, Christmas, and Avurudu showed increased spending activity.
 Explainable AI using SHAP improved understanding of model decisions.
  
-## Project Structure
-FinancialIQ/
-│
-├── Data/
-│   └── cleaned_transactions.csv
-│
-├── Machine_Learning/
-│   ├── fraud_detection_model/
-│   ├── notebooks/
-│   └── shap_analysis/
-│
-├── Flask_App/
-│   ├── app.py
-│   ├── models/
-│   ├── templates/
-│   └── static/
-│
-├── PowerBI_Dashboard/
-│   └── Screenshots/
-│
-├── Reports/
-│
-├── README.md
-│
-└── requirements.txt
+
 
 ## Future Improvements
 
