@@ -7,11 +7,11 @@ Real-time fraud monitoring
 Business decision-making through interactive analytics by combining predictive modeling with explainable insights.
 
 Power BI dashboard previews-
-Executive Overview-![Executive Overview](PowerBI_Dashboard/screenshots_PowerBI/Executive_Overview.png.png)
+Executive Overview-![Executive Overview](PowerBI_Dashboard/Executive_Overview.png)
 
-Fraud Analytics-![Fraud Analytics](PowerBI_Dashboard/screenshots_PowerBI/Fraud_Analytics.png)
+Fraud Analytics-![Fraud Analytics](PowerBI_Dashboard/Fraud_Analytics.png)
 
-Customer Behavioral Analytics-![Behavioral Analytics](PowerBI_Dashboard/screenshots_PowerBI/Behavioral_Analytics.png)
+Customer Behavioral Analytics-![Behavioral Analytics](PowerBI_Dashboard/Behavioral_Analytics.png)
 
 
 ## Dataset Overview
