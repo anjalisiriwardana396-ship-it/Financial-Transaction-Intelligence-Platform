@@ -231,7 +231,7 @@ Flask sends and receives data using JSON format:
 {
   "total_transactions": 19963,
   "fraud_rate": 0.135}
-                                                                                                                                                   --------------------------------                                                         ## Phase 9 – Interactive Dashboard
+                                                                                                                                                   --------------------------------                                                                                                ## Phase 9 – Interactive Dashboard
 
 An interactive web dashboard was developed using HTML, CSS, JavaScript, Bootstrap, and Chart.js to visualize business insights and machine learning predictions.
 
@@ -265,7 +265,7 @@ An interactive web dashboard was developed using HTML, CSS, JavaScript, Bootstra
 - Bootstrap 5
 - JavaScript (ES6)
 - Chart.js
-- Flask REST API                                                                         -----------------------------------------------------------------------------------------## Phase 10 – Model Explainability with SHAP
+- Flask REST API                                                                         -----------------------------------------------------------------------------------------                                       ## Phase 10 – Model Explainability with SHAP
  
 To improve model transparency and interpretability, SHAP (SHapley Additive exPlanations) was used to explain how the fraud detection model makes its predictions.
 
