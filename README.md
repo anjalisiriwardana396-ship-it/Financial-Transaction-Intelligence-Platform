@@ -373,17 +373,7 @@ Input Example
 {
   "total_transactions": 19963,
   "fraud_rate": 0.135}
-                                                                                                                                                   --------------------------------                                                           9 – Interactive Dashboard
-  "amount": 250,
-  "hour": 23,
-  "payment_method": "Online",
-  "merchant_category": "Electronics"
-}
-Output Example
-{
-  "prediction": "Fraud",
-  "risk_score": 0.82
-}
+                                                                                                                                                                                                            
 
 ## Interactive Web Dashboard
 
@@ -414,13 +404,7 @@ Model Performance
 - Bootstrap 5
 - JavaScript (ES6)
 - Chart.js
-- Flask REST API                                                                         ----------------------------------------------------------------------------------------- ## Phase 10 – Model Explainability with SHAP
-Includes:
-
-Yearly spending trends
-Spending by merchant category
-Fraud distribution by payment method
-Seasonal spending patterns
+- Flask REST API                                                                         s
 
 ## Fraud Prediction Interface
 
