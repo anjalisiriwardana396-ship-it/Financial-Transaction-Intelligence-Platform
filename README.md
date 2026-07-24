@@ -396,7 +396,79 @@ Total Spending
 Average Transaction Value
 Fraud Rate
 Model Performance
+## 📸 Application Screenshots
 
+### Dashboard Overview
+![Dashboard Overview](dashboard-screenshots/dashboard.png)
+
+![Dashboard Overview 2](dashboard-screenshots/dashboard_1.png)
+
+### About the Project
+![About](dashboard-screenshots/about.png)
+
+### Technology Stack
+![Technology Stack](dashboard-screenshots/Tech_stack.png)
+
+---
+
+## 📊 Analytics Dashboard
+
+![Analytics](dashboard-screenshots/Analytics.png)
+
+---
+
+## 📈 Data Visualizations
+
+![Visualization 1](dashboard-screenshots/visualization_1.png)
+
+![Visualization 2](dashboard-screenshots/visualization_2.png)
+
+![Visualization 3](dashboard-screenshots/visualization_3.png)
+
+![Visualization 4](dashboard-screenshots/visualization_4.png)
+
+![Visualization 5](dashboard-screenshots/visualization_5.png)
+
+---
+
+## 🤖 Machine Learning
+
+### Models
+![ML Models](dashboard-screenshots/ml_models.png)
+
+### SHAP Explainability
+![SHAP](dashboard-screenshots/SHAP.png)
+
+### Model Insights
+![Model Insights](dashboard-screenshots/model_insights_1.png)
+
+---
+
+## 🧠 Behavioral Analytics
+
+![Behavioral Profile](dashboard-screenshots/behavioral_profile.png)
+
+![Behavioral Profile 2](dashboard-screenshots/behavioral_profile_1.png)
+
+---
+
+## 🚨 Fraud Risk Assessment
+
+![Fraud Risk Assessment](dashboard-screenshots/fraud_risk_assesment.png)
+
+![Risk Drivers](dashboard-screenshots/Risk_drive.png)
+
+---
+
+## 📑 Reports
+
+![Reports](dashboard-screenshots/reports.png)
+
+---
+
+## ⚠️ Limitations
+
+![Limitations](dashboard-screenshots/limitations.png)
 ## Interactive Visualizations
 
 - HTML5
